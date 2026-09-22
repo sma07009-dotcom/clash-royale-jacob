@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   description:
     "A simple Clash Royale fan guide with current decks, practical strategies, card synergies, and new-player terms.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/favicon.svg`,
+    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/favicon.svg`,
   },
 };
 
