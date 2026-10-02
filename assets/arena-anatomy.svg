@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Arena anatomy</title><desc id="desc">Annotated simplified arena with enemy side, river, bridges, and player deployment side.</desc>
+  <rect width="900" height="430" rx="18" fill="#73c4a6"/>
+  <rect y="190" width="900" height="50" fill="#6bb6d1"/><rect y="208" width="900" height="14" fill="#e4ce95" opacity=".7"/>
+  <rect x="140" y="178" width="160" height="74" rx="8" fill="#c8a76b" stroke="#a6834e" stroke-width="4"/><rect x="600" y="178" width="160" height="74" rx="8" fill="#c8a76b" stroke="#a6834e" stroke-width="4"/>
+  <g font-family="Arial, sans-serif" fill="#14242f"><text x="450" y="32" text-anchor="middle" font-size="22" font-weight="700">Enemy side</text><text x="450" y="405" text-anchor="middle" font-size="22" font-weight="700">Player deployment side</text><text x="450" y="220" text-anchor="middle" font-size="18" font-weight="700">River</text><text x="220" y="270" text-anchor="middle" font-size="14">left bridge</text><text x="680" y="270" text-anchor="middle" font-size="14">right bridge</text></g>
+  <g stroke="#c97800" stroke-width="3" fill="none"><path d="M450 42V170"/><path d="M450 390V270"/></g><g fill="#c97800"><path d="M450 170l-7-12h14z"/><path d="M450 270l-7 12h14z"/></g>
+  <g fill="#ef8c82" stroke="#b84649" stroke-width="3"><circle cx="220" cy="90" r="24"/><circle cx="680" cy="115" r="24"/></g><g fill="#9ed7ec" stroke="#2588ab" stroke-width="3"><circle cx="380" cy="330" r="24"/><circle cx="530" cy="350" r="24"/></g>
+</svg>

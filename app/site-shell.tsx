@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { navigation, researchSources, type NavKey } from "./site-data";
+import { FeatureGate } from "./progression";
+import { LockedNavLink } from "./locked-nav-link";
 
 type SiteFrameProps = {
   active: NavKey;
@@ -11,6 +13,7 @@ type SiteFrameProps = {
   footerNote: string;
   showSources?: boolean;
   showHero?: boolean;
+  skipGate?: boolean;
   children: ReactNode;
 };
 
@@ -30,6 +33,7 @@ export function SiteFrame({
   footerNote,
   showSources = true,
   showHero = true,
+  skipGate = false,
   children,
 }: SiteFrameProps) {
   return (
@@ -47,14 +51,15 @@ export function SiteFrame({
           </Link>
           <nav className="site-nav" aria-label="Primary">
             {navigation.map((item) => (
-              <Link
+              <LockedNavLink
                 key={item.key}
                 className="nav-link"
                 href={item.href}
-                aria-current={item.key === active ? "page" : undefined}
+                current={item.key === active}
+                required={item.required}
               >
-                {item.label}
-              </Link>
+                {item.label}{item.required ? <span className="nav-lock">🔒</span> : null}
+              </LockedNavLink>
             ))}
           </nav>
         </div>
@@ -78,7 +83,7 @@ export function SiteFrame({
           </section>
         ) : null}
 
-        <div className="content-stack">{children}</div>
+        <div className="content-stack">{!skipGate && (active === "decks" || active === "synergies" || active === "progress" || active === "coaching") ? <FeatureGate required={{ decks: 2, synergies: 4, progress: 6, coaching: 8 }[active]}>{children}</FeatureGate> : children}</div>
 
         <footer className="site-footer">
           <p className="footer-note">{footerNote}</p>

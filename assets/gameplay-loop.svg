@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="260" viewBox="0 0 1000 260" role="img" aria-labelledby="title desc">
+  <title id="title">Gameplay prototype loop</title>
+  <desc id="desc">A flow diagram showing start, deploy, tick, combat, victory, and loss states.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#52606a"/></marker></defs>
+  <rect width="1000" height="260" rx="18" fill="#f7f4ec"/>
+  <g font-family="Arial, sans-serif" font-size="16" text-anchor="middle">
+    <g fill="#fffefa" stroke="#d7d0bd" stroke-width="2">
+      <rect x="35" y="92" width="130" height="62" rx="12"/><rect x="215" y="92" width="150" height="62" rx="12"/>
+      <rect x="415" y="92" width="150" height="62" rx="12"/><rect x="615" y="92" width="150" height="62" rx="12"/>
+      <rect x="815" y="35" width="140" height="62" rx="12"/><rect x="815" y="163" width="140" height="62" rx="12"/>
+    </g>
+    <g fill="#14242f" font-weight="700"><text x="100" y="119">Start</text><text x="100" y="140">scenario</text><text x="290" y="119">Select + deploy</text><text x="290" y="140">a card</text><text x="490" y="119">tick()</text><text x="490" y="140">every 0.1s</text><text x="690" y="119">combatStep()</text><text x="690" y="140">move / attack</text><text x="885" y="62">Victory</text><text x="885" y="83">counter-push</text><text x="885" y="190">Loss</text><text x="885" y="211">timeout / tower</text></g>
+    <g stroke="#52606a" stroke-width="2" fill="none" marker-end="url(#arrow)"><path d="M166 123H215"/><path d="M365 123H415"/><path d="M565 123H615"/><path d="M765 105L815 75"/><path d="M765 145L815 185"/><path d="M615 155C560 220 430 220 365 155"/></g>
+    <g fill="#c97800" font-size="12"><text x="790" y="86">all enemies dead</text><text x="790" y="177">timeout or tower hit</text><text x="490" y="239">loop continues while combat is active</text></g>
+  </g>
+</svg>

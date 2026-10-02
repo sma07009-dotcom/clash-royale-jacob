@@ -1,9 +1,10 @@
-export type NavKey = "decks" | "strategies" | "synergies" | "glossary" | "progress" | "coaching";
+export type NavKey = "learn" | "decks" | "strategies" | "synergies" | "glossary" | "progress" | "coaching";
 
 export type NavigationItem = {
   key: NavKey;
   label: string;
   href: string;
+  required?: number;
 };
 
 export type ResearchSource = {
@@ -46,12 +47,13 @@ export type GlossaryItem = {
 };
 
 export const navigation: NavigationItem[] = [
-  { key: "decks", label: "Decks", href: "/" },
+  { key: "learn", label: "Learn", href: "/" },
+  { key: "decks", label: "Decks", href: "/decks", required: 2 },
   { key: "strategies", label: "Strategies", href: "/strategies" },
-  { key: "synergies", label: "Synergies", href: "/synergies" },
+  { key: "synergies", label: "Synergies", href: "/synergies", required: 4 },
   { key: "glossary", label: "Glossary", href: "/glossary" },
-  { key: "progress", label: "Progress", href: "/progress" },
-  { key: "coaching", label: "Coaching", href: "/coaching" },
+  { key: "progress", label: "Progress", href: "/progress", required: 6 },
+  { key: "coaching", label: "Coaching", href: "/coaching", required: 8 },
 ];
 
 export const researchSources: ResearchSource[] = [
