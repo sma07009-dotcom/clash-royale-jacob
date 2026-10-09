@@ -1,1 +1,91 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Learn Clash Royale | Guide Hub</title><link rel="icon" href="./public/favicon.svg"><link rel="stylesheet" href="./app/globals.css"></head><body><div class="page-shell"><header class="site-topbar"><div class="site-topbar-inner"><a class="brand" href="./index.html"><span class="brand-mark">CR</span><span><span class="brand-title">Clash Royale Guide Hub</span><span class="brand-subtitle">Play, learn, improve</span></span></a><nav class="site-nav"><a class="nav-link" aria-current="page" href="./index.html">Learn</a><a class="nav-link" data-required="2" href="./decks.html">Decks 🔒</a><a class="nav-link" href="./strategies.html">Strategies</a><a class="nav-link" data-required="4" href="./synergies.html">Synergies 🔒</a><a class="nav-link" href="./glossary.html">Glossary</a><a class="nav-link" data-required="6" href="./progress.html">Progress 🔒</a><a class="nav-link" data-required="8" href="./coaching.html">Coaching 🔒</a></nav></div></header><main class="site-main"><section class="hero"><p class="eyebrow">Clash Royale fundamentals</p><h1 class="hero-title">Build your game sense, one play at a time.</h1><p class="hero-copy">Turn tricky in-game moments into simple habits with short, playable scenarios. Complete the road to unlock your guidebook.</p><div class="hero-pills"><span class="hero-pill">10 mini lessons</span><span class="hero-pill">Play to learn</span><span class="hero-pill">Unlock as you go</span></div></section><section class="learning-road"><div class="road-summary"><div><p class="eyebrow">Your learning road</p><h2>Play your way to better decisions.</h2></div><strong id="lesson-count">0/10 <span>lessons</span></strong></div><div class="road-track"><div id="road-fill" class="road-fill"></div><script>const titles=['Splash damage basics','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon','Scenario coming soon'];document.write(titles.map((t,i)=>`<div class="lesson-node" data-lesson="${i+1}"><div class="node-dot">${i+1}</div><div class="lesson-copy"><span>Lesson ${String(i+1).padStart(2,'0')}</span><h3>${t}</h3><p>${i?'This mini scenario is still being designed.':'Learn when to use a splash troop against a swarm.'}</p>${i===0?'<div class="lesson-actions"><a class="lesson-button" href="./gameplay_prototype.html">Play scenario <span>→</span></a><button class="complete-button" id="complete-1">Mark complete</button></div>':''}</div></div>`).join(''))</script></div></section><footer class="site-footer"><p class="footer-note">Your lesson progress is saved in this browser. More scenarios are coming soon.</p></footer></main></div><script src="./progression.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learn Clash Royale | Guide Hub</title>
+    <link rel="icon" href="./public/favicon.svg" />
+    <link rel="stylesheet" href="./app/globals.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-topbar">
+        <div class="site-topbar-inner">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark">CR</span>
+            <span>
+              <span class="brand-title">Clash Royale Guide Hub</span>
+              <span class="brand-subtitle">Play, learn, improve</span>
+            </span>
+          </a>
+          <nav class="site-nav" aria-label="Primary">
+            <a class="nav-link" aria-current="page" href="./index.html">Learn</a>
+            <a class="nav-link" data-required="2" href="./decks.html">Decks</a>
+            <a class="nav-link" href="./strategies.html">Strategies</a>
+            <a class="nav-link" data-required="4" href="./synergies.html">Synergies</a>
+            <a class="nav-link" href="./glossary.html">Glossary</a>
+            <a class="nav-link" data-required="6" href="./progress.html">Progress</a>
+            <a class="nav-link" data-required="8" href="./coaching.html">Coaching</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <section class="hero">
+          <p class="eyebrow">Clash Royale fundamentals</p>
+          <h1 class="hero-title">Build your game sense, one play at a time.</h1>
+          <p class="hero-copy">Turn tricky in-game moments into simple habits with short, playable scenarios. Complete the road to unlock your guidebook.</p>
+          <div class="hero-pills">
+            <span class="hero-pill">10 mini lessons</span>
+            <span class="hero-pill">Play to learn</span>
+            <span class="hero-pill">Unlock as you go</span>
+          </div>
+        </section>
+
+        <section class="learning-road">
+          <div class="road-summary">
+            <div>
+              <p class="eyebrow">Your learning road</p>
+              <h2>Play your way to better decisions.</h2>
+            </div>
+            <strong id="lesson-count">0/10 <span>lessons</span></strong>
+          </div>
+          <div class="road-track">
+            <div id="road-fill" class="road-fill"></div>
+            <script>
+              const titles = [
+                "Splash damage basics",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+                "Scenario coming soon",
+              ];
+              document.write(
+                titles
+                  .map((title, index) => {
+                    const number = index + 1;
+                    const actions = index === 0
+                      ? '<div class="lesson-actions"><a class="lesson-button" href="./gameplay_prototype.html">Play scenario <span>→</span></a><button type="button" class="complete-button" data-complete-lesson="1">Mark complete</button></div>'
+                      : '<div class="lesson-actions" hidden><button type="button" class="complete-button" data-complete-lesson="' + number + '">Mark complete</button></div>';
+                    return `<div class="lesson-node" data-lesson="${number}"><div class="node-dot">${number}</div><div class="lesson-copy"><span>Lesson ${String(number).padStart(2, "0")}</span><h3>${title}</h3><p>${index ? "This mini scenario is still being designed." : "Learn when to use a splash troop against a swarm."}</p>${actions}</div></div>`;
+                  })
+                  .join(""),
+              );
+            </script>
+          </div>
+        </section>
+
+        <footer class="site-footer">
+          <p class="footer-note">Your lesson progress is saved in this browser. More scenarios are coming soon.</p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="./progression.js"></script>
+  </body>
+</html>

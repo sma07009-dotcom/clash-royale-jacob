@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSyncExternalStore } from "react";
-import { PROGRESS_EVENT } from "./progression";
+import { useCompletedLessons } from "./progression";
 import type { MouseEvent, ReactNode } from "react";
-
-const LESSON_KEY = "cr-guide-completed-lessons";
 
 export function LockedNavLink({
   href,
@@ -20,27 +17,8 @@ export function LockedNavLink({
   className?: string;
   current?: boolean;
 }) {
-  const completed = useSyncExternalStore(
-    (onStoreChange) => {
-      window.addEventListener("storage", onStoreChange);
-      window.addEventListener(PROGRESS_EVENT, onStoreChange);
-      return () => {
-        window.removeEventListener("storage", onStoreChange);
-        window.removeEventListener(PROGRESS_EVENT, onStoreChange);
-      };
-    },
-    () => {
-      try {
-        const value = JSON.parse(window.localStorage.getItem(LESSON_KEY) || "[]");
-        return Array.isArray(value) ? value.length : 0;
-      } catch {
-        return 0;
-      }
-    },
-    () => 0,
-  );
-
-  const locked = required !== undefined && completed < required;
+  const completed = useCompletedLessons();
+  const locked = required !== undefined && completed.length < required;
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (!locked) return;
     event.preventDefault();

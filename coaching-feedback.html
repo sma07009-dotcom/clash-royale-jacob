@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coaching feedback | Clash Royale Guide Hub</title>
+    <link rel="icon" href="./public/favicon.svg" />
+    <link rel="stylesheet" href="./app/globals.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-topbar">
+        <div class="site-topbar-inner">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark">CR</span>
+            <span>
+              <span class="brand-title">Clash Royale Guide Hub</span>
+              <span class="brand-subtitle">Decks, strategies, and synergies</span>
+            </span>
+          </a>
+          <nav class="site-nav" aria-label="Primary">
+            <a class="nav-link" href="./index.html">Learn</a>
+            <a class="nav-link" data-required="2" href="./decks.html">Decks</a>
+            <a class="nav-link" href="./strategies.html">Strategies</a>
+            <a class="nav-link" data-required="4" href="./synergies.html">Synergies</a>
+            <a class="nav-link" href="./glossary.html">Glossary</a>
+            <a class="nav-link" data-required="6" href="./progress.html">Progress</a>
+            <a class="nav-link" data-required="8" aria-current="page" href="./coaching.html">Coaching</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="site-main">
+        <section class="coaching-trainer">
+          <div class="coaching-view coaching-result">
+            <div class="coaching-result-header">
+              <div>
+                <p class="coaching-pointer-kicker">Practice result</p>
+                <h1 class="coaching-title">Your coaching feedback</h1>
+              </div>
+              <div class="coaching-result-badges" aria-label="Feedback details">
+                <span id="strategy-badge">Cycle deck</span>
+                <span>3 random pointers</span>
+              </div>
+            </div>
+
+            <p class="coaching-feedback-file" id="file-name">Clip selected: Gameplay file</p>
+
+            <div class="coaching-result-grid">
+              <section class="coaching-gameplay" aria-labelledby="gameplay-heading">
+                <h2 class="coaching-section-title" id="gameplay-heading">Sample gameplay</h2>
+                <div class="coaching-video-frame">
+                  <iframe
+                    title="Sample Clash Royale gameplay clip"
+                    src="https://www.youtube.com/embed/p_TloWASvgo?start=75&amp;end=105&amp;rel=0&amp;modestbranding=1&amp;playsinline=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <div class="coaching-actions">
+                  <button class="coaching-secondary-button" id="replay-clip" type="button">Replay clip</button>
+                  <a class="coaching-secondary-button" href="./coaching.html">Analyze another</a>
+                </div>
+              </section>
+
+              <section class="coaching-pointer-panel" aria-labelledby="pointers-heading">
+                <p class="coaching-pointer-kicker">General coaching list</p>
+                <h2 class="coaching-section-title" id="pointers-heading">Three things to try</h2>
+                <ol class="coaching-pointer-list" id="pointer-list"></ol>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <footer class="site-footer">
+          <p class="footer-note">This prototype does not analyze video. It selects three general pointers from a list of twenty.</p>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      const pointerPool = [
+        "You are leaking elixir too much. When both players are close to full elixir, the opponent plays first and you wait a few seconds, which can put you about 3-4 elixir behind.",
+        "You overcommit on offense. The first push is already dying, then you add more cards, so the defender gets extra value from the same troops.",
+        "Your win condition goes in while the opponent still has their main counter ready. Try baiting that counter first, then attack when it is out of cycle.",
+        "You defend in the same lane every time. When the opponent builds a big push, pressure the opposite lane so they cannot spend everything on offense.",
+        "Your small spell is used too early. Hold Log, Zap, or Arrows until you know whether they are saving swarms for your win condition.",
+        "You are stacking support troops too close together. Spread them out so one Fireball, Poison, or splash card cannot hit everything.",
+        "Your cycle cards are being played with no purpose. Cheap cards should either defend, chip, pull troops, or help you get back to a key card.",
+        "You ignore card rotation after defending. Count how many cards the opponent plays after their building or spell, then attack before that answer returns.",
+        "Your tank is placed too early in single elixir. Wait until you have enough elixir to support it or until the opponent commits first.",
+        "You miss chances to counterpush. A surviving defender should often become the front of your next attack instead of letting it walk alone.",
+        "You play reactive cards proactively. Cards like Skeleton Army, Inferno Tower, or swarm counters are stronger when saved for the threat they answer.",
+        "Your bridge pressure is predictable. Mix same-lane and opposite-lane attacks so the opponent cannot pre-place the perfect defense.",
+        "You let the opponent activate King Tower too easily. Be careful with Tornado-able win conditions and splash placements near the center.",
+        "You spend down to zero elixir without knowing their hand. Keep a little elixir available unless you are sure their punish cards are out of cycle.",
+        "Your defensive building is too high. Pull win conditions toward the center so both towers can help and their support troops split up.",
+        "You are late with damage spells. If the opponent keeps giving Fireball or Poison value, take it before the support troops cross the bridge.",
+        "You use the same first play every match. Rotate between safe cycle cards, waiting, or a light pressure card so opponents cannot read you instantly.",
+        "You stop pressuring in double elixir. Faster decks should keep forcing responses so the opponent cannot build one huge push for free.",
+        "Your bait cards are not layered well. Force the small spell with Princess, Goblin Gang, or Skeleton Barrel before sending the bigger barrel push.",
+        "You defend the tower instead of the matchup. Sometimes taking small damage is fine if it saves the exact card you need for their next real push.",
+      ];
+
+      const params = new URLSearchParams(window.location.search);
+      const strategy = params.get("strategy") || "Cycle";
+      const fileName = params.get("file") || "Gameplay file";
+      const strategyBadge = document.querySelector("#strategy-badge");
+      const fileNameLabel = document.querySelector("#file-name");
+      const pointerList = document.querySelector("#pointer-list");
+
+      strategyBadge.textContent = `${strategy} deck`;
+      fileNameLabel.textContent = `File selected: ${fileName}`;
+
+      const shuffledPointers = pointerPool.slice();
+      for (let index = shuffledPointers.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffledPointers[index], shuffledPointers[swapIndex]] = [shuffledPointers[swapIndex], shuffledPointers[index]];
+      }
+      shuffledPointers.slice(0, 3).forEach((pointer) => {
+        const item = document.createElement("li");
+        item.textContent = pointer;
+        pointerList.appendChild(item);
+      });
+
+      document.querySelector("#replay-clip").addEventListener("click", () => {
+        const frame = document.querySelector(".coaching-video-frame iframe");
+        frame.src = `${frame.src.split("&clip=")[0]}&clip=${Date.now()}`;
+      });
+    </script>
+    <script src="./progression.js"></script>
+  </body>
+</html>

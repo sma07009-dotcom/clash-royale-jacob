@@ -1523,6 +1523,27 @@ select {
   text-align: center;
 }
 
+.coaching-selected-file,
+.coaching-feedback-file,
+.coaching-error {
+  margin: 0.7rem auto 0;
+  color: rgba(0, 0, 0, 0.78);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.coaching-error {
+  color: #7d102d;
+  font-weight: 800;
+}
+
+.coaching-feedback-file {
+  margin: -0.35rem 0 0;
+  text-align: left;
+}
+
 .coaching-strategy-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1707,6 +1728,9 @@ select {
 }
 
 .coaching-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 2.35rem;
   padding: 0.55rem 0.85rem;
   border: 2px solid var(--gold-shadow);
@@ -1718,6 +1742,7 @@ select {
   transition:
     transform 0.15s ease,
     background 0.15s ease;
+  text-decoration: none;
 }
 
 .coaching-secondary-button:hover,

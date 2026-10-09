@@ -2,10 +2,15 @@
   const lessonKey = "cr-guide-completed-lessons";
   const rules = { "decks.html": 2, "synergies.html": 4, "progress.html": 6, "coaching.html": 8 };
 
+  function normalizeCompleted(value) {
+    if (!Array.isArray(value)) return [];
+    return [...new Set(value.filter((item) => Number.isInteger(item) && item >= 1 && item <= 10))].sort((a, b) => a - b);
+  }
+
   function getCompleted() {
     try {
       const value = JSON.parse(localStorage.getItem(lessonKey) || "[]");
-      return Array.isArray(value) ? value.filter((item) => Number.isInteger(item)) : [];
+      return normalizeCompleted(value);
     } catch {
       return [];
     }
@@ -63,6 +68,13 @@
       lesson.classList.toggle("done", complete);
       lesson.classList.toggle("available", available);
       lesson.classList.toggle("locked", !available);
+      const actions = lesson.querySelector(".lesson-actions");
+      if (actions) actions.toggleAttribute("hidden", !available && !complete);
+      const completeButton = lesson.querySelector("[data-complete-lesson]");
+      if (completeButton) {
+        completeButton.textContent = complete ? "Mark incomplete" : "Mark complete";
+        completeButton.setAttribute("aria-pressed", String(complete));
+      }
       const dot = lesson.querySelector(".node-dot");
       if (dot) dot.textContent = complete ? "✓" : available ? String(number) : "🔒";
     });
@@ -73,10 +85,19 @@
     const target = event.target;
     if (!(target instanceof Element)) return;
 
-    if (target.id === "complete-1") {
+    const completeButton = target.closest("[data-complete-lesson]");
+    if (completeButton) {
+      const lessonNumber = Number(completeButton.getAttribute("data-complete-lesson"));
+      if (!Number.isInteger(lessonNumber) || lessonNumber < 1 || lessonNumber > 10) return;
       const completed = getCompleted();
-      if (!completed.includes(1)) completed.push(1);
-      localStorage.setItem(lessonKey, JSON.stringify(completed.sort((a, b) => a - b)));
+      const next = completed.includes(lessonNumber)
+        ? completed.filter((id) => id !== lessonNumber)
+        : [...completed, lessonNumber];
+      try {
+        localStorage.setItem(lessonKey, JSON.stringify(next.sort((a, b) => a - b)));
+      } catch {
+        // Completion remains available for the current page even if storage is blocked.
+      }
       update();
       return;
     }
